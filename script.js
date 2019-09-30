@@ -1,5 +1,26 @@
-const canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+function draw() {
 
-ctx.fillStyle = 'white';
-ctx.fillRect(0, 0, 150, 150);
+  // Loop through all images
+  for (var i = 0; i < document.images.length; i++) {
+
+    // Don't add a canvas for the frame image
+    if (document.images[i].getAttribute('id') != 'frame') {
+
+      // Create canvas element
+      canvas = document.createElement('canvas');
+      canvas.setAttribute('width', 132);
+      canvas.setAttribute('height', 150);
+
+      // Insert before the image
+      document.images[i].parentNode.insertBefore(canvas,document.images[i]);
+
+      ctx = canvas.getContext('2d');
+
+      // Draw image to canvas
+      ctx.drawImage(document.images[i], 15, 20);
+
+      // Add frame
+      ctx.drawImage(document.getElementById('frame'), 0, 0);
+    }
+  }
+}
